@@ -1,0 +1,19 @@
+@host = http://localhost:5270
+
+### All rows
+GET {{host}}/api/reprocessings
+
+### Filter by device + endoscope + date range
+GET {{host}}/api/reprocessings?deviceId=12&endoscopeId=8&from=2019-01-01T00:00:00Z&to=2022-07-01T00:00:00Z&limit=5000
+
+### Only failed cycles for one device
+GET {{host}}/api/reprocessings?deviceId=12&onlyFailed=true&from=2019-01-01T00:00:00Z&to=2022-07-01T00:00:00Z
+
+### Single error code
+GET {{host}}/api/reprocessings?deviceId=12&errorNumber=3057
+
+### EDC device
+GET {{host}}/api/reprocessings?deviceId=42&from=2019-01-01T00:00:00Z&to=2022-09-01T00:00:00Z
+
+### Bad params -> 400
+GET {{host}}/api/reprocessings?from=not-a-date&deviceId=abc
